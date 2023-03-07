@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package example.api.model;
+
+option java_package = "example.pb";
+
+message IdRequest {
+    string id = 1;
+}
+
+message IdResponse {
+    bool value = 1;
+}

@@ -1,0 +1,5 @@
+try-import %workspace%/user.bazelrc
+
+build --java_language_version=17
+
+test --java_language_version=17 --test_output=all --cache_test_results=no

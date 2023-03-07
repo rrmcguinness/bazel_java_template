@@ -1,0 +1,10 @@
+java_library(
+    name = "client",
+    srcs = glob(["Client.java"]),
+    visibility = ["//src/test:__subpackages__"],
+    deps = [
+        "//src/main/api:model_java_proto",
+        "//src/main/api:service_java_grpc",
+        "@io_grpc_grpc_java//api",
+    ],
+)

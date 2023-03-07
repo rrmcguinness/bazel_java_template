@@ -1,0 +1,41 @@
+load("@rules_proto//proto:defs.bzl", "proto_library")
+load("@rules_proto_grpc//java:defs.bzl", "java_grpc_library", "java_proto_library")
+load("@rules_proto_grpc//java:defs.bzl", "java_grpc_compile")
+load("//:build/proto_common.bzl", "COMMON_API_PROTOS")
+
+
+proto_library(
+    name = "model_proto",
+    srcs = ["model.proto"],
+    deps = COMMON_API_PROTOS,
+)
+
+proto_library(
+    name = "service_proto",
+    srcs = [
+        "service.proto",
+    ],
+    deps = [
+        ":model_proto",
+    ] + COMMON_API_PROTOS,
+)
+
+java_proto_library(
+    name = "model_java_proto",
+    importpath = "example.pb",
+    visibility = ["//src:__subpackages__"],
+    protos = [
+        ":model_proto",
+    ],
+)
+
+java_grpc_library(
+    name = "service_java_grpc",
+    importpath = "example.grpc",
+    protos = [":service_proto"],
+    visibility = ["//src:__subpackages__"],
+    deps = [
+        ":model_java_proto",
+        "@maven//:com_google_api_grpc_proto_google_common_protos",
+    ],
+)

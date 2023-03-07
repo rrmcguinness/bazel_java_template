@@ -1,0 +1,21 @@
+load("//:build/junit.bzl", "java_junit5_test")
+
+java_junit5_test(
+    name = "service_test",
+    srcs = [
+        "ClientTest.java",
+        "IdServiceTest.java",
+    ],
+    test_package = "example.service",
+    deps = [
+        "//src/main/api:model_java_proto",
+        "//src/main/java:model_java_library",
+        "//src/main/java:model_service_library",
+        "//src/test/java/example/client",
+        "@io_grpc_grpc_java//api",
+        "@io_grpc_grpc_java//core:inprocess",
+        "@io_grpc_grpc_java//stub",
+        "@maven//:io_grpc_grpc_core",
+        "@maven//:io_grpc_grpc_testing",
+    ],
+)

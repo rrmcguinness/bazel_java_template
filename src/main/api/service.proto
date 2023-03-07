@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package example.api.service;
+
+option java_package = "example.grpc";
+
+import "src/main/api/model.proto";
+
+service Id {
+    rpc Put(example.api.model.IdRequest) returns (example.api.model.IdResponse) {}
+}

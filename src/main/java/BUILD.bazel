@@ -1,0 +1,23 @@
+package(
+    default_visibility = ["//src/main:__subpackages__"],
+)
+
+java_library(
+    name = "model_java_library",
+    srcs = glob(["example/model/*.java"]),
+    visibility = ["//src/test:__subpackages__"],
+    deps = [
+        "//src/main/api:model_java_proto",
+    ],
+)
+
+java_library(
+    name = "model_service_library",
+    srcs = glob(["example/service/*.java"]),
+    visibility = ["//src/test:__subpackages__"],
+    deps = [
+        ":model_java_library",
+        "//src/main/api:model_java_proto",
+        "//src/main/api:service_java_grpc",
+    ],
+)
